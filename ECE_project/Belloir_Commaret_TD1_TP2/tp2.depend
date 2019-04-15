@@ -1,0 +1,85 @@
+# depslib dependency file v1.0
+1551644056 source:d:\cours\tg\sujetstp\tp2\tp2\main.cpp
+	<iostream>
+	"graphe.h"
+
+1551643974 source:d:\cours\tg\sujetstp\tp2\tp2\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<unordered_map>
+	<unordered_set>
+	"sommet.h"
+
+1551643975 d:\cours\tg\sujetstp\tp2\tp2\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1551643974 source:d:\cours\tg\sujetstp\tp2\tp2\graphe.cpp
+	<fstream>
+	<iostream>
+	"graphe.h"
+
+1551643974 d:\cours\tg\sujetstp\tp2\tp2\graphe.h
+	<string>
+	<unordered_map>
+	"sommet.h"
+
+1552849718 source:c:\users\lele1\downloads\tp2_théorie_des_graphes\tp2\main.cpp
+	<iostream>
+	"graphe.h"
+
+1552582981 c:\users\lele1\downloads\tp2_théorie_des_graphes\tp2\graphe.h
+	<string>
+	<unordered_map>
+	"sommet.h"
+
+1552582850 c:\users\lele1\downloads\tp2_théorie_des_graphes\tp2\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1552849161 source:c:\users\lele1\downloads\tp2_théorie_des_graphes\tp2\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<unordered_map>
+	<unordered_set>
+	"sommet.h"
+
+1552850068 source:c:\users\lele1\downloads\tp2_théorie_des_graphes\tp2\graphe.cpp
+	<fstream>
+	<iostream>
+	"graphe.h"
+
+1555340007 source:c:\users\inesb\desktop\belloir_commaret_td1_tp2\graphe.cpp
+	<fstream>
+	<iostream>
+	"graphe.h"
+
+1555339806 c:\users\inesb\desktop\belloir_commaret_td1_tp2\graphe.h
+	<string>
+	<unordered_map>
+	"sommet.h"
+
+1555339417 c:\users\inesb\desktop\belloir_commaret_td1_tp2\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1555338744 source:c:\users\inesb\desktop\belloir_commaret_td1_tp2\main.cpp
+	<iostream>
+	"graphe.h"
+
+1555339417 source:c:\users\inesb\desktop\belloir_commaret_td1_tp2\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<unordered_map>
+	<unordered_set>
+	"sommet.h"
+
