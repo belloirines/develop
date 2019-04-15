@@ -20,8 +20,6 @@ void Sommet::afficherVoisins() const{
         v->afficherData();
     }
 }
-
-
 Sommet::~Sommet()
 {
    //dtor

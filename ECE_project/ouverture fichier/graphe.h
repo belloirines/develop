@@ -1,9 +1,12 @@
 #ifndef GRAPHE_H
 #define GRAPHE_H
 #include <string>
+#include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include "sommet.h"
 #include "arrete.h"
+
 
 class graphe
 {

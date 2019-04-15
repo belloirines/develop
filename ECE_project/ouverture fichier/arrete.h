@@ -10,6 +10,7 @@ class Arrete
     public:
         ///constructeur qui reçoit en params les données du sommet
         Arrete(int,float,float);
+        void afficherData2() const;
         ~Arrete();
 
     protected:

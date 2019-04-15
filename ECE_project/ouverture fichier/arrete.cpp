@@ -5,9 +5,13 @@
 #include<unordered_set>
 #include "arrete.h"
 
-Sommet::Sommet(int id,double x,double y):m_id{id},m_x{x},m_x{x}
+Arrete::Arrete(int id,float x,float y): m_id{id},m_x{x},m_y{y}
 {
 }
+
+ void Arrete ::afficherData2() const{
+     std::cout<<"    "<<m_id<<" : "<<"(poids1,poids2)=("<<m_x<<","<<m_y<<")"<<std::endl;
+ }
 
 Arrete::~Arrete()
 {

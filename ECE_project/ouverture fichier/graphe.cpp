@@ -1,12 +1,13 @@
 #include <fstream>
 #include <iostream>
 #include "graphe.h"
+#include "arrete.h"
 
 
 graphe::graphe(std::string nomFichier, std::string nomFichier2){
 
     std::ifstream ifs{nomFichier};
-    std::ifstream ifs2{nomFichier};
+
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
     int ordre;
@@ -40,16 +41,20 @@ graphe::graphe(std::string nomFichier, std::string nomFichier2){
     }
     ifs.close();
 
-    int nbre_poids;
+    std::ifstream ifs2{nomFichier2};
+    if (!ifs2)
+    throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
+    int nbre_poids,taille1;
     float poids1, poids2;
-    ifs2 >> taille >> nbre_poids;
-        if ( ifs.fail() )
+    ifs2 >> taille1;
+    ifs2 >> nbre_poids;
+        if ( ifs2.fail() )
         throw std::runtime_error("Probleme lecture nombre du graphe");
-    for (int i=0; i<taille; ++i){
-     ifs2 >>arrete; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 1");
+    for (int i=0; i<taille1; ++i){
+     ifs2 >>arrete; if(ifs2.fail()) throw std::runtime_error("Probleme lecture arete sommet 1");
      ifs2 >>poids1;
      ifs2 >>poids2;
-    m_arretes.insert({new Arrete{arrete,poids1,poids2}});
+     m_arretes.insert({arrete, new Arrete{arrete,poids1,poids2}});
 
     }
 }
@@ -73,8 +78,12 @@ void graphe::afficher() const
         std::cout<<" "<<std::endl;
 
     }
-        std::cout<<"  arrete n: "<<vecSize2<<std::endl;
-        std::cout<<"  poids:  ";
+        std::cout<<" nombre d'arrete : "<<vecSize2<<std::endl;
+        std::cout<<"  poids:  "<<std::endl;
+        for ( const auto elem2 : m_arretes)
+        {
+            elem2.second->afficherData2();
+        }
 }
 
 graphe::~graphe()
