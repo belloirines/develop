@@ -2,10 +2,11 @@
 #include <iostream>
 #include "graphe.h"
 
-graphe::graphe(std::string nomFichier){
 
+graphe::graphe(std::string nomFichier, std::string nomFichier2){
 
     std::ifstream ifs{nomFichier};
+    std::ifstream ifs2{nomFichier};
     if (!ifs)
         throw std::runtime_error( "Impossible d'ouvrir en lecture " + nomFichier );
     int ordre;
@@ -35,7 +36,21 @@ graphe::graphe(std::string nomFichier){
         ifs>>id_voisin; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 2");
         //ajouter chaque extrémité à la liste des voisins de l'autre (graphe non orienté)
         (m_sommets.find(id))->second->ajouterVoisin((m_sommets.find(id_voisin))->second);
-        //(m_sommets.find(id_voisin))->second->ajouterVoisin((m_sommets.find(id))->second);//remove si graphe orienté
+        (m_sommets.find(id_voisin))->second->ajouterVoisin((m_sommets.find(id))->second);//remove si graphe orienté
+    }
+    ifs.close();
+
+    int nbre_poids;
+    float poids1, poids2;
+    ifs2 >> taille >> nbre_poids;
+        if ( ifs.fail() )
+        throw std::runtime_error("Probleme lecture nombre du graphe");
+    for (int i=0; i<taille; ++i){
+     ifs2 >>arrete; if(ifs.fail()) throw std::runtime_error("Probleme lecture arete sommet 1");
+     ifs2 >>poids1;
+     ifs2 >>poids2;
+    m_arretes.insert({new Arrete{arrete,poids1,poids2}});
+
     }
 }
 
@@ -43,7 +58,9 @@ graphe::graphe(std::string nomFichier){
 void graphe::afficher() const
 {
     size_t vecSize;
+    size_t vecSize2;
     vecSize=m_sommets.size();
+    vecSize2=m_arretes.size();
 
     std::cout<<"graphe : "<<std::endl;
     std::cout<<"  Ordre: "<<vecSize<<std::endl;
@@ -56,6 +73,8 @@ void graphe::afficher() const
         std::cout<<" "<<std::endl;
 
     }
+        std::cout<<"  arrete n: "<<vecSize2<<std::endl;
+        std::cout<<"  poids:  ";
 }
 
 graphe::~graphe()

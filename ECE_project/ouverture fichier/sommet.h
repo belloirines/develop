@@ -15,7 +15,6 @@ class Sommet
         void afficherVoisins() const;
 
         ~Sommet();
-        int getDegre();
 
     protected:
 
