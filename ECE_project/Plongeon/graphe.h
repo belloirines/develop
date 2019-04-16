@@ -13,7 +13,9 @@ class graphe
         graphe(std::string,std::string);
         //~graphe();
         void afficher() const;
-        void Prim();
+        void affichage(std::vector<int>,std::vector<int>);
+        void Prim1();
+        void Prim2();
 
     protected:
 

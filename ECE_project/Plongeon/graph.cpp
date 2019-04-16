@@ -46,11 +46,11 @@ graphe::graphe(std::string nomFichier,std::string nomFichier2){
     }
 }
 
-void affichage(std::vector<int> Prim)
+void graphe::affichage(std::vector<int> Prim,std::vector<int> venantde)
 {
     for(size_t i=0;i<Prim.size();i++)
     {
-        std::cout<<"Sommet: "<<Prim[i]<<std::endl;
+        std::cout<<"Sommet: "<<Prim[i]<<"  venant de  "<<venantde[i]<<std::endl;
     }
 }
 
@@ -69,10 +69,11 @@ void graphe::afficher() const
 }
 
 
-void graphe::Prim()
+void graphe::Prim1()
 {
     int minimum=99;
     std::vector<int> prim;
+    std::vector<int> venantde;
     int ajout=0;
     Sommet*tmp1;
     Sommet*tmp2;
@@ -91,12 +92,14 @@ void graphe::Prim()
     do{
         for(const auto& v : m_arrete)
         {
+
             if(((v->getDepart()->getMarque()==true)&&(v->getArrivee()->getMarque()==false))||((v->getDepart()->getMarque()==false)&&(v->getArrivee()->getMarque()==true)))
             {
                 if(minimum>v->getPoids1())
                 {
                     minimum=v->getPoids1();
                     tmp2=v->getDepart();
+                    venantde.push_back(tmp2->getID());
                     tmp1=v->getArrivee();
                 }
             }
@@ -117,9 +120,61 @@ void graphe::Prim()
         minimum=99;
 
     }while(ajout<m_sommets.size());
-    affichage(prim);
+    affichage(prim,venantde);
 }
 
+void graphe::Prim2()
+{
+    int minimum=99;
+    std::vector<int> prim;
+    std::vector<int> venantde;
+    int ajout=0;
+    Sommet*tmp1;
+    Sommet*tmp2;
+
+    for(const auto& elem : m_sommets)
+    {
+        if(elem.first==0)
+      {
+        elem.second->setMarque();
+        prim.push_back(elem.first);
+        ajout=ajout+1;
+      }
+
+    }
+
+    do{
+        for(const auto& v : m_arrete)
+        {
+            if(((v->getDepart()->getMarque()==true)&&(v->getArrivee()->getMarque()==false))||((v->getDepart()->getMarque()==false)&&(v->getArrivee()->getMarque()==true)))
+            {
+                if(minimum>v->getPoids2())
+                {
+                    minimum=v->getPoids2();
+                    tmp2=v->getDepart();
+                    venantde.push_back(tmp2->getID());
+                    tmp1=v->getArrivee();
+                }
+            }
+        }
+
+        if(tmp1->getMarque()==false)
+        {
+            tmp1->setMarque();
+            prim.push_back(tmp1->getID());
+            ajout=ajout+1;
+        }
+        if(tmp2->getMarque()==false)
+        {
+            tmp2->setMarque();
+            prim.push_back(tmp2->getID());
+            ajout=ajout+1;
+        }
+        minimum=99;
+
+    }while(ajout<m_sommets.size());
+   affichage(prim,venantde);
+}
 
 
 
