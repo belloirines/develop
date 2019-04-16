@@ -20,6 +20,31 @@ void Sommet::afficherVoisins() const{
         v->afficherData();
     }
 }
+
+/* bool Sommet::getMarque()
+ {
+     return marque;
+ }
+
+ void Sommet::setMarque()
+ {
+     marque=true;
+ }
+ int Sommet::getID()
+ {
+     return m_id;
+ }
+double Sommet::getDepart()
+{
+    return m_x;
+}
+
+double Sommet::getArrivee()
+{
+    return m_y;
+}
+*/
+
 Sommet::~Sommet()
 {
    //dtor

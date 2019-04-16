@@ -13,6 +13,11 @@ class Sommet
         void ajouterVoisin(const Sommet*);
         void afficherData() const;
         void afficherVoisins() const;
+        //void setMarque();
+        //bool getMarque();
+        //int getID();
+        //double getDepart();
+        //double getArrivee();
 
         ~Sommet();
 
@@ -25,7 +30,7 @@ class Sommet
         /// Données spécifiques du sommet
         int m_id; // Identifiant
         double m_x, m_y; // Position
-
+        //bool marque;
 };
 
 #endif // SOMMET_H
