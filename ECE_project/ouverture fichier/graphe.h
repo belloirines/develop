@@ -16,6 +16,7 @@ class graphe
         graphe(std::string,std::string);
         ~graphe();
         void afficher() const;
+       //void Prim();
     protected:
 
     private:

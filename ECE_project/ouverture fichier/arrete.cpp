@@ -13,6 +13,16 @@ Arrete::Arrete(int id,float x,float y): m_id{id},m_x{x},m_y{y}
      std::cout<<"    "<<m_id<<" : "<<"(poids1,poids2)=("<<m_x<<","<<m_y<<")"<<std::endl;
  }
 
+ /*int Arrete::getPoids1()
+{
+    return m_x;
+}
+
+int Arrete::getPoids2()
+{
+    return m_y;
+}*/
+
 Arrete::~Arrete()
 {
    //dtor

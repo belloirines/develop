@@ -11,6 +11,8 @@ class Arrete
         ///constructeur qui reçoit en params les données du sommet
         Arrete(int,float,float);
         void afficherData2() const;
+        /*int getPoids1();
+        int getPoids2();*/
         ~Arrete();
 
     protected:
