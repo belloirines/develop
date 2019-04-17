@@ -7,9 +7,10 @@ class Arrete
 {
     public:
         ///constructeur qui reçoit en params les données du sommet
-        Arrete(Sommet*,Sommet*,float,float);
+        Arrete(int,Sommet*,Sommet*,float,float);
         //~Arrete();
         void afficherArrete() const;
+        int getida();
         Sommet* getDepart();
         Sommet* getArrivee();
         float getPoids1();
@@ -18,6 +19,7 @@ class Arrete
     protected:
 
     private:
+        int ida;
         Sommet* depart;
         Sommet* arrivee;
         float poids1;

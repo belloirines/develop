@@ -41,16 +41,16 @@ graphe::graphe(std::string nomFichier,std::string nomFichier2){
         ifs2>>ida; if(ifs2.fail()) throw std::runtime_error("Probleme identification arrete");
         ifs2>>poids1; if(ifs2.fail()) throw std::runtime_error("Probleme lecture poids1");
         ifs2>>poids2; if(ifs2.fail()) throw std::runtime_error("Probleme lecture poids2");
-        m_arrete.push_back({new Arrete{m_sommets.find(depart)->second,m_sommets.find(arrivee)->second,poids1,poids2}});
+        m_arrete.push_back({new Arrete{ida,m_sommets.find(depart)->second,m_sommets.find(arrivee)->second,poids1,poids2}});
        // (m_sommets.find(depart))->second->ajouterVoisin((m_sommets.find(arrivee))->second);
     }
 }
 
-void graphe::affichage(std::vector<int> Prim,std::vector<int> venantde)
+void graphe::affichage(std::vector<int> Prim,std::vector<int> parlarrete,std::vector<int> venantde)
 {
     for(size_t i=0;i<Prim.size();i++)
     {
-        std::cout<<"Sommet: "<<Prim[i]<<"  venant de  "<<venantde[i]<<std::endl;
+        std::cout<<"Sommet: "<<Prim[i]<<"  venant de  "<<venantde[i]<<"  par l'arrete  "<<parlarrete[i]<<std::endl;
     }
 }
 
@@ -73,8 +73,10 @@ void graphe::Prim1()
 {
     int minimum=99;
     std::vector<int> prim;
+    std::vector<int> parlarret;
     std::vector<int> venantde;
     int ajout=0;
+    int tmp0;
     Sommet*tmp1;
     Sommet*tmp2;
 
@@ -84,6 +86,8 @@ void graphe::Prim1()
       {
         elem.second->setMarque();
         prim.push_back(elem.first);
+        parlarret.push_back(elem.first);
+        venantde.push_back(elem.first);
         ajout=ajout+1;
       }
 
@@ -98,8 +102,8 @@ void graphe::Prim1()
                 if(minimum>v->getPoids1())
                 {
                     minimum=v->getPoids1();
+                    tmp0=v->getida();
                     tmp2=v->getDepart();
-                    venantde.push_back(tmp2->getID());
                     tmp1=v->getArrivee();
                 }
             }
@@ -109,26 +113,32 @@ void graphe::Prim1()
         {
             tmp1->setMarque();
             prim.push_back(tmp1->getID());
+            parlarret.push_back(tmp0);
+            venantde.push_back(tmp2->getID());
             ajout=ajout+1;
         }
         if(tmp2->getMarque()==false)
         {
             tmp2->setMarque();
+            parlarret.push_back(tmp0);
             prim.push_back(tmp2->getID());
+            venantde.push_back(tmp1->getID());
             ajout=ajout+1;
         }
         minimum=99;
 
     }while(ajout<m_sommets.size());
-    affichage(prim,venantde);
+    affichage(prim,parlarret,venantde);
 }
 
 void graphe::Prim2()
 {
     int minimum=99;
     std::vector<int> prim;
+    std::vector<int> parlarret;
     std::vector<int> venantde;
     int ajout=0;
+    int tmp0;
     Sommet*tmp1;
     Sommet*tmp2;
 
@@ -137,6 +147,8 @@ void graphe::Prim2()
         if(elem.first==0)
       {
         elem.second->setMarque();
+        parlarret.push_back(elem.first);
+        venantde.push_back(elem.first);
         prim.push_back(elem.first);
         ajout=ajout+1;
       }
@@ -151,8 +163,8 @@ void graphe::Prim2()
                 if(minimum>v->getPoids2())
                 {
                     minimum=v->getPoids2();
+                    tmp0=v->getida();
                     tmp2=v->getDepart();
-                    venantde.push_back(tmp2->getID());
                     tmp1=v->getArrivee();
                 }
             }
@@ -162,18 +174,22 @@ void graphe::Prim2()
         {
             tmp1->setMarque();
             prim.push_back(tmp1->getID());
+            parlarret.push_back(tmp0);
+            venantde.push_back(tmp2->getID());
             ajout=ajout+1;
         }
         if(tmp2->getMarque()==false)
         {
             tmp2->setMarque();
+            parlarret.push_back(tmp0);
             prim.push_back(tmp2->getID());
+            venantde.push_back(tmp1->getID());
             ajout=ajout+1;
         }
         minimum=99;
 
     }while(ajout<m_sommets.size());
-   affichage(prim,venantde);
+   affichage(prim,parlarret,venantde);
 }
 
 
