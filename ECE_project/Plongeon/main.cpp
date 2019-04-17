@@ -2,15 +2,18 @@
 #include <stdlib.h>
 #include "graphe.h"
 
-
-
 int main()
 {
     int i=0;
+    std::string a,b;
+    std::cout << "taper le nom du fichier 1  ";
+    std::cin>>a;
+    std::cout<<a<<std::endl;
+    std::cout << "taper le nom du fichier 2  ";
+    std::cin>>b;
+    std::cout<<b<<std::endl;
 
-    std::vector<int> prim;
-    std::vector<int>venantde;
-    graphe g{"sommet_essai.txt","arrete_essai.txt"};
+    graphe g{a,b};
    // g.afficher();
 
     std::cout << "taper 1 pour prim1 et 2 pour Prim 2: ";

@@ -1,7 +1,7 @@
 #include "Arrete.h"
 #include <iostream>
 
-Arrete::Arrete(Sommet* s1,Sommet* s2,float p1, float p2):depart{s1},arrivee{s2},poids1{p1},poids2{p2}
+Arrete::Arrete(int ida, Sommet* s1,Sommet* s2,float p1, float p2):ida {ida},depart{s1},arrivee{s2},poids1{p1},poids2{p2}
 {
 }
 
@@ -12,6 +12,11 @@ void Arrete::afficherArrete() const
     std::cout<<"    "<<poids1<<std::endl;
     std::cout<<"    "<<poids2<<std::endl;
     std::cout<<"--------------------------------------------"<<std::endl;
+}
+
+int Arrete::getida()
+{
+    return ida;
 }
 
 Sommet* Arrete::getDepart()
