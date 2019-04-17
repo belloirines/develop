@@ -10,7 +10,7 @@ class Sommet
 {
     public:
         ///constructeur qui reçoit en params les données du sommet
-        Sommet(int);
+        Sommet(int,int,int);
         //void ajouterVoisin(const Sommet*);
         void afficherData() const;
         //void afficherVoisins() const;
@@ -18,6 +18,8 @@ class Sommet
         void setMarque();
         bool getMarque();
         int getID();
+        int getcx();
+        int getcy();
 
 
     protected:
@@ -27,7 +29,7 @@ class Sommet
         //std::vector<const Sommet*> m_voisins;
 
         /// Données spécifiques du sommet
-        int m_id; // Identifiant
+        int m_id, m_cx,m_cy; // Identifiant
         bool marque;
 
 };

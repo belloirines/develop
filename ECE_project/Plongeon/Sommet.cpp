@@ -1,7 +1,7 @@
 #include "Sommet.h"
 #include <iostream>
 
-Sommet::Sommet(int id):m_id{id},marque{false}
+Sommet::Sommet(int cx, int cy,int id):m_cx{cx},m_cy{cy},m_id{id},marque{false}
 {
 }
 /*
@@ -26,6 +26,16 @@ void Sommet::ajouterVoisin(const Sommet* voisin){
  int Sommet::getID()
  {
      return m_id;
+ }
+
+ int Sommet::getcx()
+ {
+     return m_cx;
+ }
+
+ int Sommet::getcy()
+ {
+     return m_cy;
  }
 
 

@@ -19,7 +19,7 @@ graphe::graphe(std::string nomFichier,std::string nomFichier2){
         ifs>>id; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
         ifs>>c1; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
         ifs>>c2; if(ifs.fail()) throw std::runtime_error("Probleme lecture données sommet");
-        m_sommets.insert({id,new Sommet{id}});
+        m_sommets.insert({id,new Sommet{c1,c2,id}});
     }
 
     int taille,taille1,colonne;
@@ -46,11 +46,11 @@ graphe::graphe(std::string nomFichier,std::string nomFichier2){
     }
 }
 
-void graphe::affichage(std::vector<int> Prim,std::vector<int> parlarrete,std::vector<int> venantde)
+void graphe::affichage(std::vector<int> Prim,std::vector<int> parlarrete,std::vector<int> venantde,std::vector<int> coord1,std::vector<int> coord2)
 {
     for(size_t i=0;i<Prim.size();i++)
     {
-        std::cout<<"Sommet: "<<Prim[i]<<"  venant de  "<<venantde[i]<<"  par l'arrete  "<<parlarrete[i]<<std::endl;
+        std::cout<<"Sommet: "<<Prim[i]<<"  de coord :   "<<coord1[i]<<";"<<coord2[i]<< "   venant de  "<<venantde[i]<<"  par l'arrete  "<<parlarrete[i]<<std::endl;
     }
 }
 
@@ -73,6 +73,8 @@ void graphe::Prim1()
 {
     int minimum=99;
     std::vector<int> prim;
+    std::vector<int> coord1;
+    std::vector<int>coord2;
     std::vector<int> parlarret;
     std::vector<int> venantde;
     int ajout=0;
@@ -85,6 +87,8 @@ void graphe::Prim1()
         if(elem.first==0)
       {
         elem.second->setMarque();
+        coord1.push_back(elem.second->getcx());
+        coord2.push_back(elem.second->getcy());
         prim.push_back(elem.first);
         parlarret.push_back(elem.first);
         venantde.push_back(elem.first);
@@ -115,37 +119,47 @@ void graphe::Prim1()
             prim.push_back(tmp1->getID());
             parlarret.push_back(tmp0);
             venantde.push_back(tmp2->getID());
+            coord1.push_back(tmp1->getcx());
+            coord2.push_back(tmp1->getcy());
             ajout=ajout+1;
         }
         if(tmp2->getMarque()==false)
         {
             tmp2->setMarque();
-            parlarret.push_back(tmp0);
             prim.push_back(tmp2->getID());
+            parlarret.push_back(tmp0);
             venantde.push_back(tmp1->getID());
+            coord1.push_back(tmp2->getcx());
+            coord2.push_back(tmp2->getcy());
             ajout=ajout+1;
         }
         minimum=99;
 
     }while(ajout<m_sommets.size());
-    affichage(prim,parlarret,venantde);
+    affichage(prim,parlarret,venantde,coord1,coord2);
 }
 
 void graphe::Prim2()
 {
     int minimum=99;
     std::vector<int> prim;
+    std::vector<int> coord1;
+    std::vector<int>coord2;
     std::vector<int> parlarret;
     std::vector<int> venantde;
     int ajout=0;
     int tmp0;
     Sommet*tmp1;
     Sommet*tmp2;
+    Sommet*tmp3;
 
     for(const auto& elem : m_sommets)
     {
         if(elem.first==0)
       {
+        coord1.push_back(elem.second->getcx());
+        coord2.push_back(elem.second->getcy());
+
         elem.second->setMarque();
         parlarret.push_back(elem.first);
         venantde.push_back(elem.first);
@@ -176,6 +190,8 @@ void graphe::Prim2()
             prim.push_back(tmp1->getID());
             parlarret.push_back(tmp0);
             venantde.push_back(tmp2->getID());
+            coord1.push_back(tmp1->getcx());
+            coord2.push_back(tmp1->getcy());
             ajout=ajout+1;
         }
         if(tmp2->getMarque()==false)
@@ -184,12 +200,14 @@ void graphe::Prim2()
             parlarret.push_back(tmp0);
             prim.push_back(tmp2->getID());
             venantde.push_back(tmp1->getID());
+            coord1.push_back(tmp2->getcx());
+            coord2.push_back(tmp2->getcy());
             ajout=ajout+1;
         }
         minimum=99;
 
     }while(ajout<m_sommets.size());
-   affichage(prim,parlarret,venantde);
+   affichage(prim,parlarret,venantde,coord1,coord2);
 }
 
 
