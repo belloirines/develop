@@ -78,7 +78,7 @@ void graphe::Prim1()
     std::vector<int> parlarret;
     std::vector<int> venantde;
     int ajout=0;
-    int tmp0;
+    int tmp0,tmp;
     Sommet*tmp1;
     Sommet*tmp2;
 
@@ -89,6 +89,7 @@ void graphe::Prim1()
         elem.second->setMarque();
         coord1.push_back(elem.second->getcx());
         coord2.push_back(elem.second->getcy());
+        //poids1.
         prim.push_back(elem.first);
         parlarret.push_back(elem.first);
         venantde.push_back(elem.first);

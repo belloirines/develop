@@ -39,6 +39,12 @@
 		<Unit filename="graph.cpp" />
 		<Unit filename="graphe.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="svgfile.cpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="svgfile.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
