@@ -2,7 +2,10 @@
 #include "svgfile.h"
 #include "util.h"
 #include <fstream>
+#include"math.h"
 #include <iostream>
+#include<list>
+#include <algorithm>
 
 graphe::graphe(std::string nomFichier,std::string nomFichier2){
     std::ifstream ifs{nomFichier};
@@ -48,6 +51,11 @@ graphe::graphe(std::string nomFichier,std::string nomFichier2){
     }
 }
 
+Arrete* graphe::getArrete(int i)
+{
+    return m_arrete[i];
+}
+
 void graphe::affichage(std::vector<int> Prim,std::vector<int> parlarrete,std::vector<int> venantde,std::vector<int> coord1,std::vector<int> coord2,std::vector<int> nv1,std::vector<int> nv2,std::vector<int>poids)
 {
     int l=0;
@@ -59,7 +67,6 @@ void graphe::affichage(std::vector<int> Prim,std::vector<int> parlarrete,std::ve
         l=l+poids[i];
         svgout.addCircle(coord1[i],coord2[i],5,10,"black");
         svgout.addLine(coord1[i],coord2[i],nv1[i],nv2[i],"red");
-        //svgout.addLine(nv1[i],nv2[i],coord1[i],coord2[i],"green");
         //svgout.addText()
         svgout.addText(coord1[i]+5,coord2[i]-15,Prim[i],"black");
     }
@@ -70,23 +77,28 @@ void graphe::affichage(std::vector<int> Prim,std::vector<int> parlarrete,std::ve
 }
 
 
-void graphe::afficher() const
+void graphe::clears()
 {
     for(const auto& elem : m_sommets)
     {
-        elem.second->afficherData();
-    }
+        elem.second->setMarque2();
 
-    for(const auto& v : m_arrete)
-    {
-        v->afficherArrete();
     }
 }
+
+/*void graphe::clears2()
+{
+    for(const auto& elem : m_sommets)
+    {
+        elem.second->setMarqueA2();
+
+    }
+}*/
 
 
 void graphe::Prim1()
 {
-    int minimum=99;
+    int passage=100;
     std::vector<int> prim;
     std::vector<int> coord1;
     std::vector<int> coord2;
@@ -95,7 +107,7 @@ void graphe::Prim1()
     std::vector<int> poids1;
     std::vector<int> parlarret;
     std::vector<int> venantde;
-    int ajout=0;
+    int compteur=0;
     int tmp0,tmp;
     Sommet*tmp1;
     Sommet*tmp2;
@@ -113,23 +125,23 @@ void graphe::Prim1()
         prim.push_back(elem.first);
         parlarret.push_back(elem.first);
         venantde.push_back(elem.first);
-        ajout=ajout+1;
+        compteur=compteur+1;
       }
 
     }
 
     do{
-        for(const auto& v : m_arrete)
+        for(const auto& elem2 : m_arrete)
         {
 
-            if(((v->getDepart()->getMarque()==true)&&(v->getArrivee()->getMarque()==false))||((v->getDepart()->getMarque()==false)&&(v->getArrivee()->getMarque()==true)))
+            if(((elem2->getDepart()->getMarque()==false)&&(elem2->getArrivee()->getMarque()==true))||((elem2->getDepart()->getMarque()==true)&&(elem2->getArrivee()->getMarque()==false)))
             {
-                if(minimum>v->getPoids1())
+                if(passage>elem2->getPoids1())
                 {
-                    minimum=v->getPoids1();
-                    tmp0=v->getida();
-                    tmp2=v->getDepart();
-                    tmp1=v->getArrivee();
+                    passage=elem2->getPoids1();
+                    tmp0=elem2->getida();
+                    tmp2=elem2->getDepart();
+                    tmp1=elem2->getArrivee();
                 }
             }
         }
@@ -140,12 +152,12 @@ void graphe::Prim1()
             prim.push_back(tmp1->getID());
             parlarret.push_back(tmp0);
             venantde.push_back(tmp2->getID());
-            poids1.push_back(minimum);
+            poids1.push_back(passage);
             coord1.push_back(tmp1->getcx());
             coord2.push_back(tmp1->getcy());
             nv1.push_back(tmp2->getcx());
             nv2.push_back(tmp2->getcy());
-            ajout=ajout+1;
+            compteur=compteur+1;
         }
         if(tmp2->getMarque()==false)
         {
@@ -153,31 +165,31 @@ void graphe::Prim1()
             prim.push_back(tmp2->getID());
             parlarret.push_back(tmp0);
             venantde.push_back(tmp1->getID());
-            poids1.push_back(minimum);
+            poids1.push_back(passage);
             coord1.push_back(tmp2->getcx());
             coord2.push_back(tmp2->getcy());
             nv1.push_back(tmp1->getcx());
             nv2.push_back(tmp1->getcy());
-            ajout=ajout+1;
+            compteur=compteur+1;
         }
-        minimum=99;
+        passage=100;
 
-    }while(ajout<m_sommets.size());
+    }while(compteur<m_sommets.size());
     affichage(prim,parlarret,venantde,coord1,coord2,nv1,nv2,poids1);
 }
 
 void graphe::Prim2()
 {
-    int minimum=99;
+    int passage=99;
     std::vector<int> prim;
     std::vector<int> coord1;
-    std::vector<int>coord2;
+    std::vector<int> coord2;
     std::vector<int> nv1;
-    std::vector<int>nv2;
+    std::vector<int> nv2;
     std::vector<int> poids2;
     std::vector<int> parlarret;
     std::vector<int> venantde;
-    int ajout=0;
+    int compteur=0;
     int tmp0;
     Sommet*tmp1;
     Sommet*tmp2;
@@ -187,31 +199,32 @@ void graphe::Prim2()
     {
         if(elem.first==0)
       {
+        elem.second->setMarque();
+
         coord1.push_back(elem.second->getcx());
         coord2.push_back(elem.second->getcy());
         nv1.push_back(elem.second->getcx());
         nv2.push_back(elem.second->getcy());
         poids2.push_back(elem.first);
-        elem.second->setMarque();
         parlarret.push_back(elem.first);
         venantde.push_back(elem.first);
         prim.push_back(elem.first);
-        ajout=ajout+1;
+        compteur=compteur+1;
       }
 
     }
 
     do{
-        for(const auto& v : m_arrete)
+        for(const auto& elem2 : m_arrete)
         {
-            if(((v->getDepart()->getMarque()==true)&&(v->getArrivee()->getMarque()==false))||((v->getDepart()->getMarque()==false)&&(v->getArrivee()->getMarque()==true)))
+            if(((elem2->getDepart()->getMarque()==false)&&(elem2->getArrivee()->getMarque()==true))||((elem2->getDepart()->getMarque()==true)&&(elem2->getArrivee()->getMarque()==false)))
             {
-                if(minimum>v->getPoids2())
+                if(passage>elem2->getPoids2())
                 {
-                    minimum=v->getPoids2();
-                    tmp0=v->getida();
-                    tmp2=v->getDepart();
-                    tmp1=v->getArrivee();
+                    passage=elem2->getPoids2();
+                    tmp0=elem2->getida();
+                    tmp2=elem2->getDepart();
+                    tmp1=elem2->getArrivee();
                 }
             }
         }
@@ -222,12 +235,12 @@ void graphe::Prim2()
             prim.push_back(tmp1->getID());
             parlarret.push_back(tmp0);
             venantde.push_back(tmp2->getID());
-            poids2.push_back(minimum);
+            poids2.push_back(passage);
             coord1.push_back(tmp1->getcx());
             coord2.push_back(tmp1->getcy());
             nv1.push_back(tmp2->getcx());
             nv2.push_back(tmp2->getcy());
-            ajout=ajout+1;
+            compteur=compteur+1;
         }
         if(tmp2->getMarque()==false)
         {
@@ -235,15 +248,212 @@ void graphe::Prim2()
             parlarret.push_back(tmp0);
             prim.push_back(tmp2->getID());
             venantde.push_back(tmp1->getID());
-            poids2.push_back(minimum);
+            poids2.push_back(passage);
             coord1.push_back(tmp2->getcx());
             coord2.push_back(tmp2->getcy());
             nv1.push_back(tmp1->getcx());
             nv2.push_back(tmp1->getcy());
+            compteur=compteur+1;
+        }
+        passage=100;
+
+    }while(passage<m_sommets.size());
+   affichage(prim,parlarret,venantde,coord1,coord2,nv1,nv2,poids2);
+}
+
+/*void graphe::arbrecouvrant(std::vector graphe)
+{
+    int passage=100;
+    std::vector<int> prim;
+    std::vector<int> coord1;
+    std::vector<int> coord2;
+    std::vector<int> nv1;
+    std::vector<int> nv2;
+    std::vector<int> poids1;
+    std::vector<int> parlarret;
+    std::vector<int> venantde;
+
+    int compteur=0;
+    int j=0;
+    int tmp0;
+    int tmp;
+    Sommet*tmp1;
+    Sommet*tmp2;
+
+    for(const auto& elem : m_sommets)
+    {
+        if(elem.first==0)
+      {
+        elem.second->setMarque();
+        coord1.push_back(elem.second->getcx());
+        coord2.push_back(elem.second->getcy());
+        nv1.push_back(elem.second->getcx());
+        nv2.push_back(elem.second->getcy());
+        poids1.push_back(elem.first);
+        prim.push_back(elem.first);
+        parlarret.push_back(elem.first);
+        venantde.push_back(elem.first);
+        compteur=compteur+1;
+      }
+    }
+    do
+    {
+     do{
+        for (i=0;)
+            for(const auto& elem2 : m_arrete)
+        {
+        tmp=elem2->getida();
+        if(getArrete(tmp)->getMarqueA()==false)
+        {
+            std::cout<<"Sommet: "<<tmp<<"  de coord :"<<std::endl;
+            j=j+1;
+            if(((elem2->getDepart()->getMarque()==false)&&(elem2->getArrivee()->getMarque()==true))||((elem2->getDepart()->getMarque()==true)&&(elem2->getArrivee()->getMarque()==false)))
+            {
+
+                if(getArrete(tmp)->getMarqueA()==false)
+                {
+                    passage=elem2->getPoids1();
+                    tmp0=elem2->getida();
+                    tmp2=elem2->getDepart();
+                    tmp1=elem2->getArrivee();
+                    //getArrete(tmp)->setMarqueA();
+
+
+                }
+            }
+
+        }
+    }
+
+        if(tmp1->getMarque()==false)
+        {
+            tmp1->setMarque();
+            prim.push_back(tmp1->getID());
+            parlarret.push_back(tmp0);
+            venantde.push_back(tmp2->getID());
+            poids1.push_back(passage);
+            coord1.push_back(tmp1->getcx());
+            coord2.push_back(tmp1->getcy());
+            nv1.push_back(tmp2->getcx());
+            nv2.push_back(tmp2->getcy());
+            compteur=compteur+1;
+        }
+        if(tmp2->getMarque()==false)
+        {
+            tmp2->setMarque();
+            prim.push_back(tmp2->getID());
+            parlarret.push_back(tmp0);
+            venantde.push_back(tmp1->getID());
+            poids1.push_back(passage);
+            coord1.push_back(tmp2->getcx());
+            coord2.push_back(tmp2->getcy());
+            nv1.push_back(tmp1->getcx());
+            nv2.push_back(tmp1->getcy());
+            compteur=compteur+1;
+        }
+        passage=100;
+        getArrete(tmp)->setMarqueA();
+        //raphe.push_back();
+
+
+    }while(compteur<m_sommets.size());
+    affichage(prim,parlarret,venantde,coord1,coord2,nv1,nv2,poids1);
+    clears();
+    }while(j<25);
+
+}*/
+void graphe::Binary(int na)
+{
+    std::vector<std::vector<int>> m_binaires;
+    std::vector<int> tampon;
+    std::vector<int> graphe;
+    std::vector<int> graphe2;
+    std::vector<int> graphe3;
+    std::vector<int> graphe4;
+    int compteur=0, bi=2,ajout=0;
+    int tmp;
+    int n;
+
+    for(int i=1;i<=pow(bi,na);i++)
+    {
+        n=i;
+        //std::cout<<" n :"<<n<<"  ";
+        int r;
+        ajout=0;
+
+        while(n!=0)
+        {
+            r=n%2;
+            tampon.push_back(r);
+            //std::cout<<r ;
+            //   ==0 ?"0":"1")+r;
+            n=(n-r)/2;
+            ajout =ajout +1;
+        }
+        while(ajout<na)
+        {
+            tampon.push_back(0);
             ajout=ajout+1;
         }
-        minimum=99;
 
-    }while(ajout<m_sommets.size());
-   affichage(prim,parlarret,venantde,coord1,coord2,nv1,nv2,poids2);
+        for (int i = 0; i < tampon.size(); i++)
+        {
+            if (tampon[i]==1)
+            {
+                compteur++;
+            }
+        }
+        //std::cout<<"  compteur "<<compteur;
+
+
+        if(compteur>3||compteur<3)
+        {
+            tampon.erase(tampon.begin(),tampon.end());
+        }
+        if(compteur==3)
+        {
+            std::reverse(tampon.begin(),tampon.end());
+            m_binaires.push_back(tampon);
+            tampon.erase(tampon.begin(),tampon.end());
+        }
+        compteur=0;
+
+    }
+    //std::cout<<std::endl;
+    for (int x=0;x<10;x++)
+    {
+        for (int y=0;y<5;y++)
+        {
+        //std::cout<<m_binaires[x][y];
+
+
+            if(m_binaires[x][y]==1)
+            {
+                graphe.push_back(m_arrete[y]->getDepart()->getID());
+                graphe3.push_back(m_arrete[y]->getArrivee()->getID());
+            }
+
+        }
+    }
+
+    Sommet*s0=(m_sommets.find(id))->second;
+    std::unordered_map<int,int> l_pred;
+    l_pred=s0->parcoursBFS();
+
+}
+
+void graphe::afficherBFS(int id) const{
+    Sommet*s0=(m_sommets.find(id))->second;
+    std::unordered_map<int,int> l_pred;
+    std::cout<<"parcoursBFS a partir de "<<id<<" :"<<std::endl;
+    l_pred=s0->parcoursBFS();
+    for(auto s:l_pred){
+        std::cout<<s.first<<" <--- ";
+        std::pair<std::string,std::string> pred=s;
+        while(pred.second!=id){
+            pred=*l_pred.find(pred.second);
+            std::cout<<pred.first<<" <--- ";
+        }
+        std::cout<<id<<std::endl;
+    }
 }

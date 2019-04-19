@@ -2,6 +2,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <cstdio>
 
 namespace util
 {

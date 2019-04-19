@@ -13,6 +13,9 @@ class Arrete
         int getida();
         Sommet* getDepart();
         Sommet* getArrivee();
+        void setMarqueA();
+        void setMarqueA2();
+        bool getMarqueA();
         float getPoids1();
         float getPoids2();
 
@@ -24,6 +27,7 @@ class Arrete
         Sommet* arrivee;
         float poids1;
         float poids2;
+        bool marque;
 };
 
 #endif // ARRETE_H_INCLUDED

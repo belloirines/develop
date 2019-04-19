@@ -14,7 +14,13 @@ class graphe
         void affichage(std::vector<int>,std::vector<int>,std::vector<int>,std::vector<int>,std::vector<int>,std::vector<int>,std::vector<int>,std::vector<int>);
         void Prim1();
         void Prim2();
-
+        void clears();
+        Arrete* getArrete(int);
+        //void arbrecouvrant();
+        void Binary(int);
+        void parcoursBFS(int) const;
+        void afficherBFS(int) const;
+        //void algo(std::vector<std::string>);
     protected:
 
     private:

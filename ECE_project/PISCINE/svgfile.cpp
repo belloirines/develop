@@ -1,6 +1,7 @@
 #include "svgfile.h"
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 const std::string svgHeader =   "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
     "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" > "

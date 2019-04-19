@@ -62,3 +62,146 @@
 	"svgfile.h"
 	"util.h"
 
+1555586656 source:c:\users\inesb\desktop\develop\ece_project\piscine\arete.cpp
+	"arete.h"
+	<iostream>
+
+1555577557 c:\users\inesb\desktop\develop\ece_project\piscine\arete.h
+	"Sommet.h"
+
+1555670314 c:\users\inesb\desktop\develop\ece_project\piscine\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1555664901 source:c:\users\inesb\desktop\develop\ece_project\piscine\graphe.cpp
+	"graphe.h"
+	"svgfile.h"
+	"util.h"
+	<fstream>
+	"math.h"
+	<iostream>
+	<list>
+	<algorithm>
+
+1555668270 c:\users\inesb\desktop\develop\ece_project\piscine\graphe.h
+	<string>
+	<unordered_map>
+	"sommet.h"
+	"arete.h"
+
+1555518441 c:\users\inesb\desktop\develop\ece_project\piscine\svgfile.h
+	<string>
+	<fstream>
+	<set>
+
+1555518441 c:\users\inesb\desktop\develop\ece_project\piscine\util.h
+	<random>
+	<string>
+
+1555623345 source:c:\users\inesb\desktop\develop\ece_project\piscine\main.cpp
+	<iostream>
+	<stdlib.h>
+	"graphe.h"
+	"svgfile.h"
+	"util.h"
+	"BruteForce.h"
+
+1555586626 source:c:\users\inesb\desktop\develop\ece_project\piscine\sommet.cpp
+	"Sommet.h"
+	<iostream>
+
+1555535727 source:c:\users\inesb\desktop\develop\ece_project\piscine\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+	<stdexcept>
+
+1555535783 source:c:\users\inesb\desktop\develop\ece_project\piscine\util.cpp
+	"util.h"
+	<random>
+	<ctime>
+	<iostream>
+	<cstdio>
+	<algorithm>
+	<cstring>
+	<iostream>
+	<thread>
+	"util.h"
+	<windows.h>
+
+1555518440 source:c:\users\inesb\desktop\piscine\arete.cpp
+	"arete.h"
+	<iostream>
+
+1555518440 c:\users\inesb\desktop\piscine\arete.h
+	"Sommet.h"
+
+1555518441 c:\users\inesb\desktop\piscine\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1555534574 source:c:\users\inesb\desktop\piscine\graphe.cpp
+	"graphe.h"
+	"svgfile.h"
+	"util.h"
+	<fstream>
+	<iostream>
+
+1555518441 c:\users\inesb\desktop\piscine\graphe.h
+	<string>
+	<unordered_map>
+	"sommet.h"
+	"arete.h"
+
+1555518441 c:\users\inesb\desktop\piscine\svgfile.h
+	<string>
+	<fstream>
+	<set>
+
+1555518441 c:\users\inesb\desktop\piscine\util.h
+	<random>
+	<string>
+
+1555518441 source:c:\users\inesb\desktop\piscine\main.cpp
+	<iostream>
+	<stdlib.h>
+	"graphe.h"
+	"svgfile.h"
+	"util.h"
+
+1555518441 source:c:\users\inesb\desktop\piscine\sommet.cpp
+	"Sommet.h"
+	<iostream>
+
+1555518441 source:c:\users\inesb\desktop\piscine\svgfile.cpp
+	"svgfile.h"
+	<iostream>
+	<sstream>
+
+1555518441 source:c:\users\inesb\desktop\piscine\util.cpp
+	"util.h"
+	<random>
+	<ctime>
+	<iostream>
+	<algorithm>
+	<cstring>
+	<iostream>
+	<thread>
+	"util.h"
+	<windows.h>
+
+1555596665 source:c:\users\inesb\desktop\develop\ece_project\piscine\bruteforce.cpp
+	"math.h"
+	"Bruteforce.h"
+	<iostream>
+
+1555596665 c:\users\inesb\desktop\develop\ece_project\piscine\bruteforce.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+

@@ -3,11 +3,14 @@
 #include "graphe.h"
 #include "svgfile.h"
 #include "util.h"
+#include "BruteForce.h"
+
 
 int main()
 {
     int i=0,j=1;
     std::string a,b;
+    std::string c;
 
     //Svgfile svgout;
     //svgout.addCircle(200,200,100,100,"black");
@@ -22,7 +25,7 @@ int main()
         std::cin>>b;
         std::cout<<b<<std::endl;
 
-        graphe g{a,b};
+        graphe g{"broadway.txt","broadway_weights_0.txt"};
 
         std::cout << "taper 1 pour prim1 et 2 pour Prim 2: ";
         std::cin>>i;
@@ -31,10 +34,17 @@ int main()
         {
         case 1:
             g.Prim1();
+            g.clears();
             break;
         case 2:
             g.Prim2();
+            g.clears();
             break;
+        case 3:
+            g.Binary(5);
+        case 4:
+            //g.arbrecouvrant();
+
         default:
             exit (EXIT_FAILURE);
             break;

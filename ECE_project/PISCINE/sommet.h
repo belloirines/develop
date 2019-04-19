@@ -16,10 +16,12 @@ class Sommet
         //void afficherVoisins() const;
         ~Sommet();
         void setMarque();
+        void setMarque2();
         bool getMarque();
         int getID();
         int getcx();
         int getcy();
+
 
 
     protected:
