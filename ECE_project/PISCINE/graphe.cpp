@@ -370,7 +370,7 @@ void graphe::Binary(int na)
     std::vector<int> graphe2;
     std::vector<int> graphe3;
     std::vector<int> graphe4;
-    int compteur=0, bi=2,ajout=0;
+    int compteur=0, bi=2,ajout=0,compt1=0;
     int tmp;
     int n;
 
@@ -434,22 +434,38 @@ void graphe::Binary(int na)
             }
 
         }
-    }
 
-    Sommet*s0=(m_sommets.find(id))->second;
-    std::unordered_map<int,int> l_pred;
-    l_pred=s0->parcoursBFS();
+    }
+    for (int o=0;o<graphe.size();o++)
+        {
+            std::cout<<graphe[o];
+            std::cout<<graphe3[o];
+            std::cout<<std::endl;
+            compt1=compt1+1;
+
+        }
+
+        std::cout<<compt1;
+            std::cout<<std::endl;
+
+    for (int o=0;o<graphe.size()-1;o++)
+    {
+        Sommet*s0=(m_sommets.find(graphe[o]))->second;
+        std::unordered_map<int,int> l_pred;
+        l_pred=s0->parcoursBFS();
+    }
 
 }
 
-void graphe::afficherBFS(int id) const{
+void graphe::afficherBFS(int id) const
+{
     Sommet*s0=(m_sommets.find(id))->second;
     std::unordered_map<int,int> l_pred;
     std::cout<<"parcoursBFS a partir de "<<id<<" :"<<std::endl;
     l_pred=s0->parcoursBFS();
     for(auto s:l_pred){
         std::cout<<s.first<<" <--- ";
-        std::pair<std::string,std::string> pred=s;
+        std::pair<int,int> pred=s;
         while(pred.second!=id){
             pred=*l_pred.find(pred.second);
             std::cout<<pred.first<<" <--- ";

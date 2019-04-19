@@ -1,8 +1,32 @@
-#include "Sommet.h"
 #include <iostream>
+#include <queue>
+#include <stack>
+#include<unordered_map>
+#include<unordered_set>
+#include "sommet.h"
 
 Sommet::Sommet(int cx, int cy,int id):m_cx{cx},m_cy{cy},m_id{id},marque{false}
 {
+}
+
+void Sommet::ajouterVoisin(const Sommet* voisin){
+    m_voisins.push_back(voisin);
+}
+ void Sommet::afficherData() const{
+     std::cout<<"    "<<m_id<<" : "<<"(x,y)=("<<m_cx<<","<<m_cy<<")"<<std::endl;
+ }
+void Sommet::afficherVoisins() const{
+    std::cout<<"  voisins :"<<std::endl;
+    for(auto v:m_voisins) {
+        v->afficherData();
+    }
+}
+
+int Sommet::getDegre() //on reprend le code BFS
+{
+    int degre;
+    degre=(this->m_voisins.size());
+    return degre;
 }
 
  bool Sommet::getMarque()
@@ -43,6 +67,8 @@ Sommet::Sommet(int cx, int cy,int id):m_cx{cx},m_cy{cy},m_id{id},marque{false}
     std::unordered_map< int, int> l_pred;
     file.push(this); // premier sommet + on l'enfile
     marque.insert(this); // on le marque
+
+
 
     while (!file.empty())
     {

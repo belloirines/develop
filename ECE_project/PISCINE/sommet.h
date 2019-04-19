@@ -15,12 +15,16 @@ class Sommet
         void afficherData() const;
         //void afficherVoisins() const;
         ~Sommet();
+        void ajouterVoisin(const Sommet*);
+        void afficherVoisins() const;
         void setMarque();
         void setMarque2();
         bool getMarque();
         int getID();
         int getcx();
         int getcy();
+        int getDegre();
+        std::unordered_map<int,int> parcoursBFS() const;
 
 
 
@@ -28,7 +32,7 @@ class Sommet
 
     private:
         /// Voisinage : liste d'adjacence
-        //std::vector<const Sommet*> m_voisins;
+        std::vector<const Sommet*> m_voisins;
 
         /// Données spécifiques du sommet
         int m_id, m_cx,m_cy; // Identifiant
