@@ -1,1 +1,97 @@
 #include <iostream>
+#include <stdlib.h>
+#include "graphe.h"
+#include "svgfile.h"
+#include "util.h"
+#include "BruteForce.h"
+
+
+int main()
+{
+
+    std::cout << "          --------------------------------------------------"<<std::endl;
+    std::cout << "         |                 OPTIVILLE  2019                  |"<<std::endl;
+    std::cout << "         |          La Ville de tous les POSSIBLES          |"<<std::endl;
+    std::cout << "         |              Venez bientôt découvrir             |"<<std::endl;
+    std::cout << "         |                notre piste cyclable              |"<<std::endl;
+    std::cout << "         |           toute derniere génération!!!!          |"<<std::endl;
+    std::cout << "         |                elle est à la fois :              |"<<std::endl;
+    std::cout << "         |                    ECOLOGIQUE                    |"<<std::endl;
+    std::cout << "         |        et vous permet de parcourir la ville      |"<<std::endl;
+    std::cout << "         |             plus vite qu'une formule 1           |"<<std::endl;
+    std::cout << "         |               alors n'attendez plus !            |"<<std::endl;
+    std::cout << "         |                commencez à pédaler !             |"<<std::endl;
+    std::cout << "          --------------------------------------------------"<<std::endl;
+
+    std::cout<<"							   _____"<<std::endl;
+    std::cout<<"				|___			     |"<<std::endl;
+    std::cout<<"				 |			     |"<<std::endl;
+    std::cout<<"				 |___________________________|"<<std::endl;
+    std::cout<<"				/			     |"<<std::endl;
+    std::cout<<"			 ______/			  ___|___"<<std::endl;
+    std::cout<<"			/     /\		      	         /   |   \ "<<std::endl;
+    std::cout<<"		       /     /  \			/    |    \ "<<std::endl;
+    std::cout<<"		      /     /    \		       /     |	   \ "<<std::endl;
+    std::cout<<"		      \           /		       \	           /"<<std::endl;
+    std::cout<<"		       \         /		        \	  /"<<std::endl;
+    std::cout<<"			 \______/	                  \_______/"<<std::endl;
+
+
+
+        notre piste cyclable toute derniere génération!!!!
+
+    std::cout << "Bonjour, bienvenue dans notre contrée jeune étranger !"<<std::endl;
+    std::cout << "Le vent nous a conté que vous vouliez optimiser certaines de nos villes dans l'élan écologique qui pousse notre planette vers un meilleur avenir..."<<std::endl;
+    std::cout << "Belle initiative bienveillante de votre part !"<<std::endl;
+    int i=0,j=1;
+    std::string a,b;
+    std::string c;
+
+    //Svgfile svgout;
+    //svgout.addCircle(200,200,100,100,"black");
+
+
+    while(j != 0)
+    {
+
+
+        std::cout << "  Quelle ville voulez-vous étudier ?   ";
+        std::cin>>a;
+        std::cout<<a<<std::endl;
+        std::cout << "      En fonction de quels critères ? ";
+        std::cin>>b;
+        std::cout<<b<<std::endl;
+
+        graphe g{"broadway.txt","broadway_weights_0.txt"};
+
+        std::cout << "      Pour creer votre piste ciclable quelle donnees voulez-vous mesurer ? 1 - coût financier / 2 - usage optimal ";
+        std::cin>>i;
+        std::cout<<i<<std::endl;
+        switch (i)
+        {
+        case 1:
+            g.Prim1();
+            g.clears();
+            break;
+        case 2:
+            g.Prim2();
+            g.clears();
+            break;
+        case 3:
+            g.Binary(5);
+        case 4:
+            //g.arbrecouvrant();
+
+        default:
+            exit (EXIT_FAILURE);
+            break;
+        }
+
+        std::cout << "Continuer ?" << std::endl << "OUI : 1" << std::endl << "NON : 0" << std::endl;
+        std::cin >> j;
+    }
+    return 0;
+}
+
+
+
